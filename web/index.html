@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BROKEN LORD – Pair Chamber</title>
+  <style>
+    body {
+      background:#050016;
+      color:#fff;
+      font-family:sans-serif;
+      text-align:center;
+      padding:40px;
+    }
+    input {
+      width:80%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #7b3cff;
+      background:#0b021f;
+      color:#fff;
+    }
+    button {
+      margin-top:15px;
+      padding:10px 25px;
+      border-radius:999px;
+      border:none;
+      background:#7b3cff;
+      color:#fff;
+      font-size:16px;
+      cursor:pointer;
+    }
+    .code {
+      margin-top:20px;
+      padding:10px;
+      border-radius:8px;
+      border:1px dashed #7b3cff;
+      background:#12052b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>BROKEN LORD – Pair Chamber</h1>
+  <p>
+    KABLA ya kubonyeza Generate:<br>
+    Fungua WhatsApp → Linked devices → Link with phone number.
+  </p>
+
+  <p>Weka namba yako ya WhatsApp (mfano 255688422125) kupata PAIR CODE.</p>
+
+  <input id="num" placeholder="255688422125">
+  <button onclick="gen()">Generate Code</button>
+
+  <div id="res" class="code" style="display:none;"></div>
+
+  <script>
+    async function gen() {
+      const number = document.getElementById("num").value.trim();
+      if (!number) return alert("Weka namba kwanza.");
+
+      document.getElementById("res").style.display="block";
+      document.getElementById("res").innerHTML = "Inatengeneza PAIR CODE...";
+
+      const res = await fetch("/api/pair", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({ number })
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        document.getElementById("res").innerHTML = "Error: " + data.error;
+        return;
+      }
+
+      document.getElementById("res").innerHTML =
+        "PAIR CODE: <b>" + data.code + "</b><br><br>" +
+        "Fungua WhatsApp → Linked Devices → Link with phone number → weka code hii.";
+    }
+  </script>
+
+</body>
+</html>
