@@ -1,0 +1,19 @@
+{
+  "name": "broken-lord-md",
+  "version": "1.0.0",
+  "description": "BROKEN LORD WhatsApp Bot with Pair Code (Render Edition)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.x <=20.x"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "latest",
+    "express": "latest",
+    "node-fetch": "latest",
+    "pino": "latest",
+    "axios": "latest"
+  }
+}
